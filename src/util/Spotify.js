@@ -1,6 +1,6 @@
 let accessToken;
 const clientId = 'deb893321b254c52bba3a4e398647532';
-const redirectURI = 'http://http://localhost:3000/';
+const redirectURI = 'http://localhost:3000/';
 //const redirectURI = 'http://clammy-train.surge.sh';
 
 const Spotify = {
