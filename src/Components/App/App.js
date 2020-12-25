@@ -17,14 +17,14 @@ function App() {
       return;
     } else {
       playlistTracks.push(track);
-      setPlaylistTracks(playlistTracks);
+      setPlaylistTracks([...playlistTracks]);
     }
   }
 
   function removeTrack(track) {
     const index = playlistTracks.indexOf(track);
     playlistTracks.splice(index, 1);
-    setPlaylistTracks(playlistTracks);
+    setPlaylistTracks([...playlistTracks]);
   }
 
   function updatePlaylistName(name) {
@@ -41,7 +41,7 @@ function App() {
 
   function search(term) {
     Spotify.search(term).then(searchResults => {
-      setSearchResults(searchResults);
+      setSearchResults([...searchResults]);
     });
   }
 
