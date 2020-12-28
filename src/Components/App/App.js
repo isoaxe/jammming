@@ -27,10 +27,6 @@ function App() {
     setPlaylistTracks([...playlistTracks]);
   }
 
-  function updatePlaylistName(name) {
-    setPlaylistName(name);
-  }
-
   function savePlaylist() {
     const trackURIs = playlistTracks.map(track => track.uri);
     Spotify.savePlaylist(playlistName, trackURIs).then(() => {
@@ -52,7 +48,7 @@ function App() {
         <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={updatePlaylistName} onSave={savePlaylist} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} />
         </div>
       </div>
     </div>

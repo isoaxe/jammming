@@ -4,12 +4,8 @@ import './SearchBar.css';
 
 function SearchBar(props) {
 
-  function search(term) {
-    props.onSearch(term);
-  }
-
   function handleTermChange(e) {
-    search(e.target.value);
+    props.onSearch(e.target.value);
   }
 
   return (
