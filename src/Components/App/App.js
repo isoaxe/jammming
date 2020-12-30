@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import SearchBar from '../SearchBar/SearchBar.js';
 import SearchResults from '../SearchResults/SearchResults.js';
@@ -42,6 +42,11 @@ function App() {
       setSearchResults([...searchResults]);
     });
   }
+
+  useEffect(() => {
+    // Generate access token before running search to prevent page reset on initial search.
+    Spotify.getAccessToken();
+  }, []);
 
   return (
     <div>
