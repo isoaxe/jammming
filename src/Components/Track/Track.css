@@ -38,3 +38,10 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+a {
+  font-size: .83rem;
+  font-weight: 300;
+  color: rgba(256, 256, 256, 0.8);
+  text-decoration: none;
+}

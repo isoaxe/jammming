@@ -22,11 +22,17 @@ function Track(props) {
     }
   }
 
+  function renderPreview() {
+    if (props.track.previewUrl) {
+      return <a href={props.track.previewUrl} target="_blank" rel="noopener noreferrer"> | Preview</a>
+    }
+  }
+
   return (
     <div className="Track">
       <div className="Track-information">
         <h3>{props.track.name}</h3>
-        <p>{props.track.artist + ' | ' + props.track.album}</p>
+        <p>{props.track.artist + ' | ' + props.track.album} {renderPreview()}</p>
       </div>
       {renderAction()}
     </div>
