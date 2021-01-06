@@ -10,7 +10,6 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
-  const [trackIndex, setTrackIndex] = useState(null);
 
   function addTrack(track) {
     // If the track is already on the playlist, do not save.
@@ -23,7 +22,6 @@ function App() {
       const index = searchResults.indexOf(track);
       searchResults.splice(index, 1);
       setSearchResults([...searchResults]);
-      setTrackIndex(index);
     }
   }
 
@@ -32,7 +30,7 @@ function App() {
     playlistTracks.splice(index, 1);
     setPlaylistTracks([...playlistTracks]);
     // Add track back to searchResults if removing from playlistTracks.
-    searchResults.splice(trackIndex, 0, track);
+    searchResults.unshift(track);
     setSearchResults([...searchResults]);
   }
 
