@@ -10,6 +10,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
+  const [successMsg, setSuccessMsg] = useState(false);
 
   function addTrack(track) {
     // If the track is already on the playlist, do not save.
@@ -38,6 +39,7 @@ function App() {
     const trackURIs = playlistTracks.map(track => track.uri);
     if (playlistTracks.length > 0) {
       Spotify.savePlaylist(playlistName, trackURIs).then(() => {
+        saveMsg();
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
       });
@@ -48,6 +50,12 @@ function App() {
     Spotify.search(term).then(searchResults => {
       setSearchResults([...searchResults]);
     });
+  }
+
+  function saveMsg() {
+    // This function should activate the saveMsg prop for 3 seconds.
+    setSuccessMsg(true);
+    setTimeout(() => {setSuccessMsg(false)}, 3000);
   }
 
   useEffect(() => {
@@ -62,7 +70,7 @@ function App() {
         <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} displayMsg={successMsg} />
         </div>
       </div>
     </div>
