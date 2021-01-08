@@ -47,7 +47,7 @@ function App() {
   }
 
   function retrievePlaylists() {
-    
+    Spotify.retrievePlaylists();
   }
 
   function search(term) {
