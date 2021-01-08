@@ -46,6 +46,10 @@ function App() {
     }
   }
 
+  function retrievePlaylists() {
+    
+  }
+
   function search(term) {
     Spotify.search(term).then(searchResults => {
       setSearchResults([...searchResults]);
@@ -70,7 +74,7 @@ function App() {
         <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} displayMsg={successMsg} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} displayMsg={successMsg} />
         </div>
       </div>
     </div>
