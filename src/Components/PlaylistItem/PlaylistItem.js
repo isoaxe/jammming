@@ -5,9 +5,8 @@ import './PlaylistItem.css';
 function PlaylistItem(props) {
 
   return (
-    <div className="Playlist">
-      <div className="Playlist-information">
-      </div>
+    <div className="PlaylistItem">
+      <p>{props.name}</p>
     </div>
   );
 }
