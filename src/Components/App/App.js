@@ -47,8 +47,8 @@ function App() {
     }
   }
 
-  function retrievePlaylists() {
-    const allPlaylists = Spotify.retrievePlaylists();
+  async function retrievePlaylists() {
+    const allPlaylists = await Spotify.retrievePlaylists();
     setPlaylists(allPlaylists);
   }
 
