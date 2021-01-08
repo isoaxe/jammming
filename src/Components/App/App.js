@@ -11,6 +11,7 @@ function App() {
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
   const [successMsg, setSuccessMsg] = useState(false);
+  const [playlists, setPlaylists] = useState([]);
 
   function addTrack(track) {
     // If the track is already on the playlist, do not save.
@@ -47,7 +48,8 @@ function App() {
   }
 
   function retrievePlaylists() {
-    Spotify.retrievePlaylists();
+    const allPlaylists = Spotify.retrievePlaylists();
+    setPlaylists(allPlaylists);
   }
 
   function search(term) {
@@ -74,7 +76,7 @@ function App() {
         <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} displayMsg={successMsg} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} playlists={playlists} displayMsg={successMsg} />
         </div>
       </div>
     </div>
