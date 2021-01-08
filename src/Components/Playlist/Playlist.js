@@ -1,6 +1,7 @@
 import React from 'react';
 import './Playlist.css';
 import TrackList from '../TrackList/TrackList.js';
+import PlaylistList from '../PlaylistList/PlaylistList.js';
 
 
 function Playlist(props) {
@@ -23,7 +24,9 @@ function Playlist(props) {
     <div className="Playlist">
       <input value={props.playlistName} onChange={handleNameChange} />
       <TrackList tracks={props.playlistTracks} onRemove={props.onRemove} isRemoval={true} />
-      <button className="Playlist-save" onClick={props.onSave}>SAVE TO SPOTIFY</button>
+      <button className="Playlist-button" onClick={props.onSave}>SAVE TO SPOTIFY</button>
+      <button className="Playlist-button" onClick={props.onRetrieve}>RETRIEVE PLAYLISTS</button>
+      <PlaylistList playlists={props.playlists} />
       <p id="Message">Playlist saved!</p>
     </div>
   );
