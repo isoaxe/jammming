@@ -93,7 +93,12 @@ const Spotify = {
   },
 
   deletePlaylist(id) {
-    
+    const accessToken = Spotify.getAccessToken();
+    const headers = {Authorization: `Bearer ${accessToken}`};
+    return fetch(`https://api.spotify.com/v1/playlists/${id}/followers`, {
+      method: 'DELETE',
+      headers: headers
+    });
   }
 }
 
