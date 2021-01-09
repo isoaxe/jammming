@@ -54,6 +54,7 @@ function App() {
 
   function deletePlaylist(id) {
     Spotify.deletePlaylist(id);
+    setTimeout(() => retrievePlaylists(), 200);
   }
 
   function search(term) {
