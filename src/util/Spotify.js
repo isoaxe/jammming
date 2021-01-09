@@ -90,6 +90,10 @@ const Spotify = {
         id: playlists.id
       }));
     })
+  },
+
+  deletePlaylist(id) {
+    
   }
 }
 
