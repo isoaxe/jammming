@@ -50,8 +50,10 @@ function App() {
   }
 
   async function retrievePlaylists() {
+    activateMsg('Retrieving playlists...', '#FF8C00');
     const allPlaylists = await Spotify.retrievePlaylists();
     setPlaylists(allPlaylists);
+    setTimeout(() => activateMsg('Playlists retrieved.', '#228B22'), 400);
   }
 
   function deletePlaylist(id) {
