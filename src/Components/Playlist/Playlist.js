@@ -16,7 +16,7 @@ function Playlist(props) {
   }
 
   function displayMessage() {
-    if (props.displayMsg) {
+    if (props.msgVisibility) {
       document.getElementById("Message").style.visibility = "visible";
     } else {
       document.getElementById("Message").style.visibility = "hidden";

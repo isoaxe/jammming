@@ -11,7 +11,7 @@ function App() {
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
   const [playlists, setPlaylists] = useState([]);
-  const [displayMsg, setDisplayMsg] = useState(false);
+  const [msgVisibility, setMsgVisibility] = useState(false);
   const [messageText, setMessageText] = useState('');
   const [messageColor, setMessageColor] = useState('');
 
@@ -69,8 +69,8 @@ function App() {
     setMessageText(text);
     setMessageColor(color);
     // Activates the displayMsg prop for 3 seconds.
-    setDisplayMsg(true);
-    setTimeout(() => {setDisplayMsg(false)}, 3000);
+    setMsgVisibility(true);
+    setTimeout(() => {setMsgVisibility(false)}, 3000);
   }
 
   useEffect(() => {
@@ -85,7 +85,7 @@ function App() {
         <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} playlists={playlists} displayMsg={displayMsg} msgText={messageText} msgColor={messageColor} delete={deletePlaylist} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} delete={deletePlaylist} />
         </div>
       </div>
     </div>
