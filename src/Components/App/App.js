@@ -12,7 +12,7 @@ function App() {
   const [playlistName, setPlaylistName] = useState('New Playlist');
   const [playlists, setPlaylists] = useState([]);
   const [displayMsg, setDisplayMsg] = useState(false);
-  const [messageText, serMessageText] = useState('');
+  const [messageText, setMessageText] = useState('');
   const [messageColor, setMessageColor] = useState('');
 
   function addTrack(track) {
@@ -42,7 +42,7 @@ function App() {
     const trackURIs = playlistTracks.map(track => track.uri);
     if (playlistTracks.length > 0) {
       Spotify.savePlaylist(playlistName, trackURIs).then(() => {
-        activateMsg();
+        activateMsg('Playlist saved!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
       });
@@ -65,8 +65,10 @@ function App() {
     });
   }
 
-  function activateMsg() {
-    // This function activates the displayMsg prop for 3 seconds.
+  function activateMsg(text, color) {
+    setMessageText(text);
+    setMessageColor(color);
+    // Activates the displayMsg prop for 3 seconds.
     setDisplayMsg(true);
     setTimeout(() => {setDisplayMsg(false)}, 3000);
   }
