@@ -10,9 +10,9 @@ function Playlist(props) {
     props.onNameChange(e.target.value);
   }
 
-  function message(text, color) {
-    setTimeout(() => document.getElementById("Message").style.color = color);
-    return <p id="Message">{text}</p>
+  function message() {
+    setTimeout(() => document.getElementById("Message").style.color = props.msgColor);
+    return <p id="Message">{props.msgText}</p>
   }
 
   function displayMessage() {
@@ -30,7 +30,7 @@ function Playlist(props) {
       <input value={props.playlistName} onChange={handleNameChange} />
       <TrackList tracks={props.playlistTracks} onRemove={props.onRemove} isRemoval={true} />
       <button className="Playlist-button" onClick={props.onSave}>SAVE TO SPOTIFY</button>
-      {message('Playlist saved!', '#228B22')}
+      {message()}
       <button className="Playlist-button" onClick={props.onRetrieve}>RETRIEVE PLAYLISTS</button>
       <PlaylistList playlists={props.playlists} delete={props.delete} />
     </div>
