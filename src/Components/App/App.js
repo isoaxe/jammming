@@ -10,7 +10,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
-  const [successMsg, setSuccessMsg] = useState(false);
+  const [displayMsg, setDisplayMsg] = useState(false);
   const [playlists, setPlaylists] = useState([]);
 
   function addTrack(track) {
@@ -40,7 +40,7 @@ function App() {
     const trackURIs = playlistTracks.map(track => track.uri);
     if (playlistTracks.length > 0) {
       Spotify.savePlaylist(playlistName, trackURIs).then(() => {
-        saveMsg();
+        activateMsg();
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
       });
@@ -63,10 +63,10 @@ function App() {
     });
   }
 
-  function saveMsg() {
-    // This function should activate the saveMsg prop for 3 seconds.
-    setSuccessMsg(true);
-    setTimeout(() => {setSuccessMsg(false)}, 3000);
+  function activateMsg() {
+    // This function activates the displayMsg prop for 3 seconds.
+    setDisplayMsg(true);
+    setTimeout(() => {setDisplayMsg(false)}, 3000);
   }
 
   useEffect(() => {
@@ -81,7 +81,7 @@ function App() {
         <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} playlists={playlists} displayMsg={successMsg} delete={deletePlaylist} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} playlists={playlists} displayMsg={displayMsg} delete={deletePlaylist} />
         </div>
       </div>
     </div>
