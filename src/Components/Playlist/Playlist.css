@@ -16,6 +16,7 @@
   outline: 0;
   background: transparent;
   border-bottom: 1px solid #6f6f6f;
+  margin-bottom: 1.27rem;
   font-family: 'Poppins', sans-serif;
   font-size: 1.55rem;
   color: #fff;
@@ -27,7 +28,6 @@
   padding: .77rem 0;
   border-radius: 54px;
   border-width: 0px;
-  margin-top: 1.27rem;
   background-color: #6c41ec;
   text-align: center;
   font-size: .83rem;
@@ -48,6 +48,7 @@
 #Message {
   color: #fff;
   visibility: hidden;
+  margin: 10px 0px;
 }
 
 @media only screen and (max-width: 1020px) {
