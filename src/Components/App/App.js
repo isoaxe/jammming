@@ -10,8 +10,10 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
-  const [displayMsg, setDisplayMsg] = useState(false);
   const [playlists, setPlaylists] = useState([]);
+  const [displayMsg, setDisplayMsg] = useState(false);
+  const [messageText, serMessageText] = useState('');
+  const [messageColor, setMessageColor] = useState('');
 
   function addTrack(track) {
     // If the track is already on the playlist, do not save.
@@ -81,7 +83,7 @@ function App() {
         <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} playlists={playlists} displayMsg={displayMsg} delete={deletePlaylist} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} playlists={playlists} displayMsg={displayMsg} msgText={messageText} msgColor={messageColor} delete={deletePlaylist} />
         </div>
       </div>
     </div>
