@@ -14,6 +14,8 @@ function App() {
   const [msgVisibility, setMsgVisibility] = useState(false);
   const [messageText, setMessageText] = useState('');
   const [messageColor, setMessageColor] = useState('');
+  // Track whether button is HIDE or RETRIEVE PLAYLISTS.
+  const [retrievalButton, setRetrievalButton] = useState(true);
 
   function addTrack(track) {
     // If the track is already on the playlist, do not save.
@@ -80,6 +82,15 @@ function App() {
     setTimeout(() => {setMsgVisibility(false)}, 3000);
   }
 
+  function toggleButton() {
+    setRetrievalButton(!retrievalButton);
+    if (retrievalButton) {
+      retrievePlaylists();
+    } else {
+      setPlaylists([]);
+    }
+  }
+
   useEffect(() => {
     // Generate access token before running search to prevent page reset on initial search.
     Spotify.getAccessToken();
@@ -92,7 +103,7 @@ function App() {
         <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} delete={deletePlaylist} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} delete={deletePlaylist} retrievalButton={retrievalButton} />
         </div>
       </div>
     </div>
