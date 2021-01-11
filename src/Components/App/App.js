@@ -83,8 +83,12 @@ function App() {
   }
 
   function toggleButton() {
-    retrievePlaylists();
     setRetrievalButton(!retrievalButton);
+    if (retrievalButton) {
+      retrievePlaylists();
+    } else {
+      setPlaylists([]);
+    }
   }
 
   useEffect(() => {
