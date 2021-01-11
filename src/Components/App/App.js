@@ -14,6 +14,8 @@ function App() {
   const [msgVisibility, setMsgVisibility] = useState(false);
   const [messageText, setMessageText] = useState('');
   const [messageColor, setMessageColor] = useState('');
+  // Track whether button is HIDE or RETRIEVE PLAYLISTS.
+  const [retrievalButton, setRetrievalButton] = useState(true);
 
   function addTrack(track) {
     // If the track is already on the playlist, do not save.
@@ -92,7 +94,7 @@ function App() {
         <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} delete={deletePlaylist} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} delete={deletePlaylist} retrievalButton={retrievalButton} />
         </div>
       </div>
     </div>
