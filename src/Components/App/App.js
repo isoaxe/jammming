@@ -10,8 +10,10 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
-  const [successMsg, setSuccessMsg] = useState(false);
   const [playlists, setPlaylists] = useState([]);
+  const [msgVisibility, setMsgVisibility] = useState(false);
+  const [messageText, setMessageText] = useState('');
+  const [messageColor, setMessageColor] = useState('');
 
   function addTrack(track) {
     // If the track is already on the playlist, do not save.
@@ -40,7 +42,7 @@ function App() {
     const trackURIs = playlistTracks.map(track => track.uri);
     if (playlistTracks.length > 0) {
       Spotify.savePlaylist(playlistName, trackURIs).then(() => {
-        saveMsg();
+        activateMsg('Playlist saved!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
       });
@@ -48,13 +50,16 @@ function App() {
   }
 
   async function retrievePlaylists() {
+    activateMsg('Retrieving playlists...', '#FF8C00');
     const allPlaylists = await Spotify.retrievePlaylists();
     setPlaylists(allPlaylists);
+    setTimeout(() => activateMsg('Playlists retrieved.', '#228B22'), 400);
   }
 
   function deletePlaylist(id) {
     Spotify.deletePlaylist(id);
-    setTimeout(() => retrievePlaylists(), 500);
+    activateMsg('Playlist deleted.', '#FF0000');
+    setTimeout(() => retrievePlaylists(), 800);
   }
 
   function search(term) {
@@ -63,10 +68,12 @@ function App() {
     });
   }
 
-  function saveMsg() {
-    // This function should activate the saveMsg prop for 3 seconds.
-    setSuccessMsg(true);
-    setTimeout(() => {setSuccessMsg(false)}, 3000);
+  function activateMsg(text, color) {
+    setMessageText(text);
+    setMessageColor(color);
+    // Activates the displayMsg prop for 3 seconds.
+    setMsgVisibility(true);
+    setTimeout(() => {setMsgVisibility(false)}, 3000);
   }
 
   useEffect(() => {
@@ -81,7 +88,7 @@ function App() {
         <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} playlists={playlists} displayMsg={successMsg} delete={deletePlaylist} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={retrievePlaylists} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} delete={deletePlaylist} />
         </div>
       </div>
     </div>

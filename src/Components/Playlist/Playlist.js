@@ -10,8 +10,13 @@ function Playlist(props) {
     props.onNameChange(e.target.value);
   }
 
+  function message() {
+    setTimeout(() => document.getElementById("Message").style.color = props.msgColor);
+    return <p id="Message">{props.msgText}</p>
+  }
+
   function displayMessage() {
-    if (props.displayMsg) {
+    if (props.msgVisibility) {
       document.getElementById("Message").style.visibility = "visible";
     } else {
       document.getElementById("Message").style.visibility = "hidden";
@@ -25,9 +30,9 @@ function Playlist(props) {
       <input value={props.playlistName} onChange={handleNameChange} />
       <TrackList tracks={props.playlistTracks} onRemove={props.onRemove} isRemoval={true} />
       <button className="Playlist-button" onClick={props.onSave}>SAVE TO SPOTIFY</button>
+      {message()}
       <button className="Playlist-button" onClick={props.onRetrieve}>RETRIEVE PLAYLISTS</button>
       <PlaylistList playlists={props.playlists} delete={props.delete} />
-      <p id="Message">Playlist saved!</p>
     </div>
   );
 }
