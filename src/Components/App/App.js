@@ -48,10 +48,6 @@ function App() {
         activateMsg('Playlist saved!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
-        // Update list of playlists if already open after saving.
-        if (playlists.length) {
-          retrievePlaylists();
-        }
       });
     }
     if (playlistTracks.length && isEdit) {
@@ -61,6 +57,10 @@ function App() {
         setPlaylistTracks([]);
       });
       setIsEdit(false);
+    }
+    // Update list of playlists if already open after saving.
+    if (playlists.length) {
+      retrievePlaylists();
     }
   }
 
