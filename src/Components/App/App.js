@@ -69,7 +69,8 @@ function App() {
   }
 
   async function editPlaylist(playlistId) {
-    const playlistName = await Spotify.retrievePlaylistName(playlistId);
+    const name = await Spotify.retrievePlaylistName(playlistId);
+    const tracks = await Spotify.retrievePlaylistTracks(playlistId);
   }
 
   function search(term) {
