@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import SearchBar from '../SearchBar/SearchBar.js';
 import SearchResults from '../SearchResults/SearchResults.js';
@@ -77,7 +77,7 @@ function App() {
   function activateMsg(text, color) {
     setMessageText(text);
     setMessageColor(color);
-    // Activates the displayMsg prop for 3 seconds.
+    // Activates the msgVisibility prop for 3 seconds.
     setMsgVisibility(true);
     setTimeout(() => {setMsgVisibility(false)}, 3000);
   }
@@ -91,16 +91,16 @@ function App() {
     }
   }
 
-  useEffect(() => {
+  function getToken() {
     // Generate access token before running search to prevent page reset on initial search.
     Spotify.getAccessToken();
-  }, []);
+  }
 
   return (
     <div>
       <h1>Ja<span className="highlight">mmm</span>ing</h1>
       <div className="App">
-        <SearchBar onSearch={search} />
+        <SearchBar onSearch={search} token={getToken} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
           <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} delete={deletePlaylist} retrievalButton={retrievalButton} />

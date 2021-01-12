@@ -10,7 +10,7 @@ function SearchBar(props) {
 
   return (
     <div className="SearchBar">
-      <input placeholder="Enter A Song, Album, or Artist" onChange={handleTermChange} />
+      <input placeholder="Enter A Song, Album, or Artist" onChange={handleTermChange} onClick={props.token} />
     </div>
   );
 }
