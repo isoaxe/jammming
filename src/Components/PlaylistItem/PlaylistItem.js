@@ -14,7 +14,7 @@ function PlaylistItem(props) {
 
   return (
     <div className="PlaylistItem">
-      <p onClick={editPlaylist}>{props.name}</p>
+      <p className="Edit" onClick={editPlaylist}>{props.name}</p>
       <p className="Delete" onClick={deletePlaylist}>X</p>
     </div>
   );
