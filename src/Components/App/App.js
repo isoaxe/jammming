@@ -68,6 +68,10 @@ function App() {
     setTimeout(() => retrievePlaylists(), 800);
   }
 
+  function editPlaylist(id) {
+    Spotify.editPlaylist(id);
+  }
+
   function search(term) {
     Spotify.search(term).then(searchResults => {
       setSearchResults([...searchResults]);
@@ -103,7 +107,7 @@ function App() {
         <SearchBar onSearch={search} token={getToken} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} delete={deletePlaylist} retrievalButton={retrievalButton} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} retrievalButton={retrievalButton} edit={editPlaylist} delete={deletePlaylist} />
         </div>
       </div>
     </div>
