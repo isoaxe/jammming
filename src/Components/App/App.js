@@ -71,6 +71,8 @@ function App() {
   async function editPlaylist(playlistId) {
     const name = await Spotify.retrievePlaylistName(playlistId);
     const tracks = await Spotify.retrievePlaylistTracks(playlistId);
+    setPlaylistName(name);
+    setPlaylistTracks(tracks);
   }
 
   function search(term) {
