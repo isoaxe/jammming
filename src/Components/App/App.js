@@ -68,8 +68,8 @@ function App() {
     setTimeout(() => retrievePlaylists(), 800);
   }
 
-  function editPlaylist(id) {
-    Spotify.editPlaylist(id);
+  async function editPlaylist(playlistId) {
+    const playlistName = await Spotify.retrievePlaylistName(playlistId);
   }
 
   function search(term) {
