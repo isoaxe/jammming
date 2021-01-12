@@ -54,6 +54,14 @@ function App() {
         }
       });
     }
+    if (playlistTracks.length && isEdit) {
+      Spotify.editPlaylist(playlistName, trackURIs).then(() => {
+        activateMsg('Playlist edited!', '#228B22');
+        setPlaylistName('New Playlist');
+        setPlaylistTracks([]);
+      });
+      setIsEdit(false);
+    }
   }
 
   async function retrievePlaylists() {
