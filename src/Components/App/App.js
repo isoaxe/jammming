@@ -16,6 +16,7 @@ function App() {
   const [messageColor, setMessageColor] = useState('');
   // Track whether button is HIDE or RETRIEVE PLAYLISTS.
   const [retrievalButton, setRetrievalButton] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
 
   function addTrack(track) {
     // If the track is already on the playlist, do not save.
@@ -42,7 +43,7 @@ function App() {
 
   function savePlaylist() {
     const trackURIs = playlistTracks.map(track => track.uri);
-    if (playlistTracks.length > 0) {
+    if (playlistTracks.length && !isEdit) {
       Spotify.savePlaylist(playlistName, trackURIs).then(() => {
         activateMsg('Playlist saved!', '#228B22');
         setPlaylistName('New Playlist');
@@ -73,6 +74,7 @@ function App() {
     const tracks = await Spotify.retrievePlaylistTracks(playlistId);
     setPlaylistName(name);
     setPlaylistTracks(tracks);
+    setIsEdit(true);
   }
 
   function search(term) {
