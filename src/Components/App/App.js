@@ -32,7 +32,9 @@ function App() {
       setSearchResults([...searchResults]);
     }
     if (editMode) {
-      Spotify.addTrack(track.uri, playlistId);
+      Spotify.addTrack(track.uri, playlistId).then(() => {
+        activateMsg('Track added!', '#228B22');
+      });
     }
   }
 
@@ -44,7 +46,9 @@ function App() {
     searchResults.unshift(track);
     setSearchResults([...searchResults]);
     if (editMode) {
-      Spotify.deleteTrack(track.uri, playlistId);
+      Spotify.deleteTrack(track.uri, playlistId).then(() => {
+        activateMsg('Track removed!', '#FF0000');
+      });
     }
   }
 
