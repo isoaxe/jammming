@@ -10,6 +10,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
+  const [playlistId, setPlaylistId] = useState('');
   const [playlists, setPlaylists] = useState([]);
   const [msgVisibility, setMsgVisibility] = useState(false);
   const [messageText, setMessageText] = useState('');
@@ -51,7 +52,7 @@ function App() {
       });
     }
     if (playlistTracks.length && isEdit) {
-      Spotify.renamePlaylist(playlistName).then(() => {
+      Spotify.renamePlaylist(playlistName, playlistId).then(() => {
         activateMsg('Playlist renamed!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
@@ -81,6 +82,7 @@ function App() {
     const name = await Spotify.retrievePlaylistName(playlistId);
     const tracks = await Spotify.retrievePlaylistTracks(playlistId);
     setPlaylistName(name);
+    setPlaylistId(playlistId);
     setPlaylistTracks(tracks);
     setIsEdit(true);
   }
