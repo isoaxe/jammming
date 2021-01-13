@@ -4,8 +4,8 @@ import './PlaylistItem.css';
 
 function PlaylistItem(props) {
 
-  function editPlaylist() {
-    props.edit(props.id);
+  function getPlaylist() {
+    props.get(props.id);
   }
 
   function deletePlaylist() {
@@ -14,7 +14,7 @@ function PlaylistItem(props) {
 
   return (
     <div className="PlaylistItem">
-      <p className="Edit" onClick={editPlaylist}>{props.name}</p>
+      <p className="Edit" onClick={getPlaylist}>{props.name}</p>
       <p className="Delete" onClick={deletePlaylist}>X</p>
     </div>
   );

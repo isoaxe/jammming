@@ -78,7 +78,7 @@ function App() {
     setTimeout(() => retrievePlaylists(), 800);
   }
 
-  async function editPlaylist(playlistId) {
+  async function getPlaylist(playlistId) {
     const name = await Spotify.retrievePlaylistName(playlistId);
     const tracks = await Spotify.retrievePlaylistTracks(playlistId);
     setPlaylistName(name);
@@ -122,7 +122,7 @@ function App() {
         <SearchBar onSearch={search} token={getToken} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} retrievalButton={retrievalButton} edit={editPlaylist} delete={deletePlaylist} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} retrievalButton={retrievalButton} get={getPlaylist} delete={deletePlaylist} />
         </div>
       </div>
     </div>
