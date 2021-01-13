@@ -17,7 +17,7 @@ function App() {
   const [messageColor, setMessageColor] = useState('');
   // Track whether button is HIDE or RETRIEVE PLAYLISTS.
   const [retrievalButton, setRetrievalButton] = useState(true);
-  const [isEdit, setIsEdit] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   function addTrack(track) {
     // If the track is already on the playlist, do not save.
@@ -31,7 +31,7 @@ function App() {
       searchResults.splice(index, 1);
       setSearchResults([...searchResults]);
     }
-    if (isEdit) {
+    if (editMode) {
       Spotify.addTrack(track.uri, playlistId);
     }
   }
@@ -47,20 +47,20 @@ function App() {
 
   function savePlaylist() {
     const trackURIs = playlistTracks.map(track => track.uri);
-    if (playlistTracks.length && !isEdit) {
+    if (playlistTracks.length && !editMode) {
       Spotify.savePlaylist(playlistName, trackURIs).then(() => {
         activateMsg('Playlist saved!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
       });
     }
-    if (playlistTracks.length && isEdit) {
+    if (playlistTracks.length && editMode) {
       Spotify.renamePlaylist(playlistName, playlistId).then(() => {
         activateMsg('Playlist renamed!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
       });
-      setIsEdit(false);
+      setEditMode(false);
     }
     // Update list of playlists if already open after saving.
     if (playlists.length) {
@@ -87,7 +87,7 @@ function App() {
     setPlaylistName(name);
     setPlaylistId(playlistId);
     setPlaylistTracks(tracks);
-    setIsEdit(true);
+    setEditMode(true);
   }
 
   function search(term) {
