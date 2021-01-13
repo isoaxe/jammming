@@ -31,6 +31,9 @@ function App() {
       searchResults.splice(index, 1);
       setSearchResults([...searchResults]);
     }
+    if (isEdit) {
+      Spotify.addTrack(track.uri, playlistId);
+    }
   }
 
   function removeTrack(track) {
