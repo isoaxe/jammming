@@ -43,6 +43,9 @@ function App() {
     // Add track back to searchResults if removing from playlistTracks.
     searchResults.unshift(track);
     setSearchResults([...searchResults]);
+    if (editMode) {
+      Spotify.deleteTrack(track.uri, playlistId);
+    }
   }
 
   function savePlaylist() {
