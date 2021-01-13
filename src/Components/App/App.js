@@ -10,12 +10,14 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
+  const [playlistId, setPlaylistId] = useState('');
   const [playlists, setPlaylists] = useState([]);
   const [msgVisibility, setMsgVisibility] = useState(false);
   const [messageText, setMessageText] = useState('');
   const [messageColor, setMessageColor] = useState('');
   // Track whether button is HIDE or RETRIEVE PLAYLISTS.
   const [retrievalButton, setRetrievalButton] = useState(true);
+  const [editMode, setEditMode] = useState(false);
 
   function addTrack(track) {
     // If the track is already on the playlist, do not save.
@@ -29,6 +31,11 @@ function App() {
       searchResults.splice(index, 1);
       setSearchResults([...searchResults]);
     }
+    if (editMode) {
+      Spotify.addTrack(track.uri, playlistId).then(() => {
+        activateMsg('Track added!', '#228B22');
+      });
+    }
   }
 
   function removeTrack(track) {
@@ -38,20 +45,33 @@ function App() {
     // Add track back to searchResults if removing from playlistTracks.
     searchResults.unshift(track);
     setSearchResults([...searchResults]);
+    if (editMode) {
+      Spotify.deleteTrack(track.uri, playlistId).then(() => {
+        activateMsg('Track removed!', '#FF0000');
+      });
+    }
   }
 
   function savePlaylist() {
     const trackURIs = playlistTracks.map(track => track.uri);
-    if (playlistTracks.length > 0) {
+    if (playlistTracks.length && !editMode) {
       Spotify.savePlaylist(playlistName, trackURIs).then(() => {
         activateMsg('Playlist saved!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
-        // Update list of playlists if already open after saving.
-        if (playlists.length) {
-          retrievePlaylists();
-        }
       });
+    }
+    if (playlistTracks.length && editMode) {
+      Spotify.renamePlaylist(playlistName, playlistId).then(() => {
+        activateMsg('Playlist renamed!', '#228B22');
+        setPlaylistName('New Playlist');
+        setPlaylistTracks([]);
+      });
+      setEditMode(false);
+    }
+    // Update list of playlists if already open after saving.
+    if (playlists.length) {
+      setTimeout(() => retrievePlaylists(), 1500);
     }
   }
 
@@ -66,6 +86,15 @@ function App() {
     Spotify.deletePlaylist(id);
     activateMsg('Playlist deleted.', '#FF0000');
     setTimeout(() => retrievePlaylists(), 800);
+  }
+
+  async function getPlaylist(playlistId) {
+    const name = await Spotify.retrievePlaylistName(playlistId);
+    const tracks = await Spotify.retrievePlaylistTracks(playlistId);
+    setPlaylistName(name);
+    setPlaylistId(playlistId);
+    setPlaylistTracks(tracks);
+    setEditMode(true);
   }
 
   function search(term) {
@@ -103,7 +132,7 @@ function App() {
         <SearchBar onSearch={search} token={getToken} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} delete={deletePlaylist} retrievalButton={retrievalButton} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} retrievalButton={retrievalButton} get={getPlaylist} delete={deletePlaylist} />
         </div>
       </div>
     </div>

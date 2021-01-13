@@ -92,6 +92,69 @@ const Spotify = {
     })
   },
 
+  retrievePlaylistName(playlistId) {
+    const accessToken = Spotify.getAccessToken();
+    const headers = {Authorization: `Bearer ${accessToken}`};
+    return fetch(`https://api.spotify.com/v1/playlists/${playlistId}`, {
+      method: 'GET',
+      headers: headers
+    })
+    .then(response => response.json())
+    .then(jsonResponse => {
+      return jsonResponse.name;
+    })
+  },
+
+  retrievePlaylistTracks(playlistId) {
+    const accessToken = Spotify.getAccessToken();
+    const headers = {Authorization: `Bearer ${accessToken}`};
+    return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+      method: 'GET',
+      headers: headers
+    })
+    .then(response => response.json())
+    .then(jsonResponse => {
+      return jsonResponse.items.map(song => ({
+        id: song.track.id,
+        name: song.track.name,
+        artist: song.track.artists[0].name,
+        album: song.track.album.name,
+        uri: song.track.uri,
+        previewUrl: song.track.preview_url
+      }))
+    })
+  },
+
+  renamePlaylist(playlistName, playlistId) {
+    const accessToken = Spotify.getAccessToken();
+    const headers = {Authorization: `Bearer ${accessToken}`};
+    return fetch(`https://api.spotify.com/v1/playlists/${playlistId}`, {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify({name: playlistName})
+    })
+  },
+
+  addTrack(trackURI, playlistId) {
+    const accessToken = Spotify.getAccessToken();
+    const headers = {Authorization: `Bearer ${accessToken}`};
+    return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({uris: [trackURI]})
+    })
+  },
+
+  deleteTrack(trackURI, playlistId) {
+    const accessToken = Spotify.getAccessToken();
+    const headers = {Authorization: `Bearer ${accessToken}`};
+    return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+      method: 'DELETE',
+      headers: headers,
+      body: JSON.stringify({tracks: [{uri: trackURI}]})
+    })
+  },
+
   deletePlaylist(id) {
     const accessToken = Spotify.getAccessToken();
     const headers = {Authorization: `Bearer ${accessToken}`};

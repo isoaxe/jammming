@@ -6,7 +6,7 @@ import PlaylistItem from '../PlaylistItem/PlaylistItem.js';
 function PlaylistList(props) {
   return (
     <div className="PlaylistList">
-      {props.playlists.map(playlist => <PlaylistItem name={playlist.name} id={playlist.id} delete={props.delete} key={playlist.id} />)}
+      {props.playlists.map(playlist => <PlaylistItem name={playlist.name} key={playlist.id} id={playlist.id} get={props.get} delete={props.delete} />)}
     </div>
   );
 }
