@@ -60,14 +60,14 @@ function App() {
 
   function savePlaylist() {
     const trackURIs = playlistTracks.map(track => track.uri);
-    if (playlistTracks.length && !editMode) {
+    if (trackURIs.length && playlistName && !editMode) {
       Spotify.savePlaylist(playlistName, trackURIs).then(() => {
         activateMsg('Playlist saved!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
       });
     }
-    if (playlistTracks.length && editMode) {
+    if (trackURIs.length && playlistName && editMode) {
       Spotify.renamePlaylist(playlistName, playlistId).then(() => {
         activateMsg('Playlist renamed!', '#228B22');
         setPlaylistName('New Playlist');
