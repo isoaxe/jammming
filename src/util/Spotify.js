@@ -73,7 +73,7 @@ const Spotify = {
     })
   },
 
-  retrievePlaylists() {
+  getPlaylists() {
     const accessToken = Spotify.getAccessToken();
     const headers = {Authorization: `Bearer ${accessToken}`};
     let userId;
@@ -92,7 +92,7 @@ const Spotify = {
     })
   },
 
-  retrievePlaylistName(playlistId) {
+  getPlaylistName(playlistId) {
     const accessToken = Spotify.getAccessToken();
     const headers = {Authorization: `Bearer ${accessToken}`};
     return fetch(`https://api.spotify.com/v1/playlists/${playlistId}`, {
@@ -105,7 +105,7 @@ const Spotify = {
     })
   },
 
-  retrievePlaylistTracks(playlistId) {
+  getPlaylistTracks(playlistId) {
     const accessToken = Spotify.getAccessToken();
     const headers = {Authorization: `Bearer ${accessToken}`};
     return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {

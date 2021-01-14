@@ -15,8 +15,8 @@ function App() {
   const [msgVisibility, setMsgVisibility] = useState(false);
   const [messageText, setMessageText] = useState('');
   const [messageColor, setMessageColor] = useState('');
-  // Track whether button is HIDE or RETRIEVE PLAYLISTS.
-  const [retrievalButton, setRetrievalButton] = useState(true);
+  // Track whether button is HIDE or GET PLAYLISTS.
+  const [getButton, setGetButton] = useState(true);
   const [editMode, setEditMode] = useState(false);
 
   function addTrack(track) {
@@ -71,13 +71,13 @@ function App() {
     }
     // Update list of playlists if already open after saving.
     if (playlists.length) {
-      setTimeout(() => retrievePlaylists(), 1500);
+      setTimeout(() => getPlaylists(), 1500);
     }
   }
 
-  async function retrievePlaylists() {
+  async function getPlaylists() {
     activateMsg('Retrieving playlists...', '#FF8C00');
-    const allPlaylists = await Spotify.retrievePlaylists();
+    const allPlaylists = await Spotify.getPlaylists();
     setPlaylists(allPlaylists);
     setTimeout(() => activateMsg('Playlists retrieved.', '#228B22'), 400);
   }
@@ -85,12 +85,12 @@ function App() {
   function deletePlaylist(id) {
     Spotify.deletePlaylist(id);
     activateMsg('Playlist deleted.', '#FF0000');
-    setTimeout(() => retrievePlaylists(), 800);
+    setTimeout(() => getPlaylists(), 800);
   }
 
   async function getPlaylist(playlistId) {
-    const name = await Spotify.retrievePlaylistName(playlistId);
-    const tracks = await Spotify.retrievePlaylistTracks(playlistId);
+    const name = await Spotify.getPlaylistName(playlistId);
+    const tracks = await Spotify.getPlaylistTracks(playlistId);
     setPlaylistName(name);
     setPlaylistId(playlistId);
     setPlaylistTracks(tracks);
@@ -112,9 +112,9 @@ function App() {
   }
 
   function toggleButton() {
-    setRetrievalButton(!retrievalButton);
-    if (retrievalButton) {
-      retrievePlaylists();
+    setGetButton(!getButton);
+    if (getButton) {
+      getPlaylists();
     } else {
       setPlaylists([]);
     }
@@ -132,7 +132,7 @@ function App() {
         <SearchBar onSearch={search} token={getToken} />
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onRetrieve={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} retrievalButton={retrievalButton} get={getPlaylist} delete={deletePlaylist} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onGet={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} getButton={getButton} get={getPlaylist} delete={deletePlaylist} />
         </div>
       </div>
     </div>
