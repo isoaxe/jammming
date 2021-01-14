@@ -141,7 +141,12 @@ function App() {
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
           <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onGet={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} getButton={getButton} get={getPlaylist} delete={deletePlaylist} />
         </div>
-        <div id="Temp-user"></div>
+        <div id="Temp-user">
+          <h3>Temporary user details:</h3>
+          <p className="Description">Don't have a Spotify account and not bothered creating one? Not a problem - use the login credentials below and you can still test out the app.</p>
+          <p className="Login">Username: 313tgjrwnueaobmyzepfgtcucj6y</p>
+          <p className="Login">Password: testuser</p>
+        </div>
       </div>
     </div>
   );
