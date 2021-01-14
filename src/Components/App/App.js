@@ -19,6 +19,12 @@ function App() {
   const [getButton, setGetButton] = useState(true);
   const [editMode, setEditMode] = useState(false);
 
+  function search(term) {
+    Spotify.search(term).then(searchResults => {
+      setSearchResults([...searchResults]);
+    });
+  }
+
   function addTrack(track) {
     // If the track is already on the playlist, do not save.
     if (playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
@@ -75,6 +81,15 @@ function App() {
     }
   }
 
+  async function getPlaylist(playlistId) {
+    const name = await Spotify.getPlaylistName(playlistId);
+    const tracks = await Spotify.getPlaylistTracks(playlistId);
+    setPlaylistName(name);
+    setPlaylistId(playlistId);
+    setPlaylistTracks(tracks);
+    setEditMode(true);
+  }
+
   async function getPlaylists() {
     activateMsg('Retrieving playlists...', '#FF8C00');
     const allPlaylists = await Spotify.getPlaylists();
@@ -86,21 +101,6 @@ function App() {
     Spotify.deletePlaylist(id);
     activateMsg('Playlist deleted.', '#FF0000');
     setTimeout(() => getPlaylists(), 800);
-  }
-
-  async function getPlaylist(playlistId) {
-    const name = await Spotify.getPlaylistName(playlistId);
-    const tracks = await Spotify.getPlaylistTracks(playlistId);
-    setPlaylistName(name);
-    setPlaylistId(playlistId);
-    setPlaylistTracks(tracks);
-    setEditMode(true);
-  }
-
-  function search(term) {
-    Spotify.search(term).then(searchResults => {
-      setSearchResults([...searchResults]);
-    });
   }
 
   function activateMsg(text, color) {
