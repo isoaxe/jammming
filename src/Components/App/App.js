@@ -136,10 +136,12 @@ function App() {
       <h1>Ja<span className="highlight">mmm</span>ing</h1>
       <div className="App">
         <SearchBar onSearch={search} token={getToken} />
+        <a href="#Temp-user"><button className="Temp-access-button">Get temporary access details</button></a>
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
           <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onGet={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} getButton={getButton} get={getPlaylist} delete={deletePlaylist} />
         </div>
+        <div id="Temp-user"></div>
       </div>
     </div>
   );
