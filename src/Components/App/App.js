@@ -136,9 +136,16 @@ function App() {
       <h1>Ja<span className="highlight">mmm</span>ing</h1>
       <div className="App">
         <SearchBar onSearch={search} token={getToken} />
+        <a href="#Temp-user" className="Temp-access-button"><button>GET TEMPORARY ACCESS DETAILS</button></a>
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
           <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onGet={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} getButton={getButton} get={getPlaylist} delete={deletePlaylist} />
+        </div>
+        <div id="Temp-user">
+          <h3>Temporary user details:</h3>
+          <p className="Description">Don't have a Spotify account and not bothered creating one? Not a problem - use the login credentials below and you can still test out the app.</p>
+          <p className="Login">Username:<span> 313tgjrwnueaobmyzepfgtcucj6y</span></p>
+          <p className="Login">Password:<span> testuser</span></p>
         </div>
       </div>
     </div>
