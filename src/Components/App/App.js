@@ -144,8 +144,8 @@ function App() {
         <div id="Temp-user">
           <h3>Temporary user details:</h3>
           <p className="Description">Don't have a Spotify account and not bothered creating one? Not a problem - use the login credentials below and you can still test out the app.</p>
-          <p className="Login">Username: 313tgjrwnueaobmyzepfgtcucj6y</p>
-          <p className="Login">Password: testuser</p>
+          <p className="Login">Username:<span> 313tgjrwnueaobmyzepfgtcucj6y</span></p>
+          <p className="Login">Password:<span> testuser</span></p>
         </div>
       </div>
     </div>
