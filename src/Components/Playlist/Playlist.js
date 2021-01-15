@@ -36,7 +36,7 @@ function Playlist(props) {
       <button className="Playlist-button" onClick={props.onSave}>SAVE TO SPOTIFY</button>
       {message()}
       <button className="Playlist-button" onClick={props.onGet}>{toggleButton()} PLAYLISTS</button>
-      <PlaylistList playlists={props.playlists} get={props.get} delete={props.delete} />
+      <PlaylistList playlists={props.playlists} getButton={props.getButton} get={props.get} delete={props.delete} />
     </div>
   );
 }
