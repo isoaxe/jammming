@@ -24,11 +24,7 @@ function Playlist(props) {
   }
 
   function toggleButton() {
-    if (props.getButton) {
-      return 'GET';
-    } else {
-      return 'HIDE';
-    }
+    return (props.getButton) ? 'GET' : 'HIDE';
   }
 
   setTimeout(() => {displayMessage()});
