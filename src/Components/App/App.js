@@ -82,7 +82,7 @@ function App() {
       setEditMode(false);
     }
     // Update list of playlists if already open after saving.
-    if (playlists.length) {
+    if (!getButton) {
       setTimeout(() => getPlaylists(), 1500);
     }
   }
