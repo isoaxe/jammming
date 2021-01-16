@@ -8,7 +8,7 @@ function PlaylistList(props) {
   function playlistMode() {
     if (props.playlists.length) {
       return props.playlists.map(playlist => <PlaylistItem name={playlist.name} key={playlist.id} id={playlist.id} get={props.get} delete={props.delete} />);
-    } else if (!props.playlists.length && !props.getButton) {
+    } else if (!props.playlists.length && !props.getButton && props.playlistsFetched) {
       return <p className="Message">There are no saved playlists to display.</p>;
     }
   }

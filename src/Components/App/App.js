@@ -18,6 +18,7 @@ function App() {
   // Track whether button is HIDE or GET PLAYLISTS.
   const [getButton, setGetButton] = useState(true);
   const [editMode, setEditMode] = useState(false);
+  const [playlistsFetched, setPlaylistsFetched] = useState(false);
 
   function search(term) {
     Spotify.search(term).then(searchResults => {
@@ -71,6 +72,7 @@ function App() {
         activateMsg('Playlist saved!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
+        setPlaylistsFetched(false);
       });
     }
     if (editMode) {
@@ -100,6 +102,7 @@ function App() {
     activateMsg('Retrieving playlists...', '#FF8C00');
     const allPlaylists = await Spotify.getPlaylists();
     setPlaylists(allPlaylists);
+    setPlaylistsFetched(true);
     setTimeout(() => activateMsg('Playlists retrieved.', '#228B22'), 400);
   }
 
@@ -123,6 +126,7 @@ function App() {
       getPlaylists();
     } else {
       setPlaylists([]);
+      setPlaylistsFetched(false);
     }
   }
 
@@ -139,7 +143,7 @@ function App() {
         <a href="#Temp-user" className="Temp-access-button"><button>GET TEMPORARY ACCESS DETAILS</button></a>
         <div className="App-playlist">
           <SearchResults searchResults={searchResults} onAdd={addTrack} />
-          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onGet={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} getButton={getButton} get={getPlaylist} delete={deletePlaylist} />
+          <Playlist playlistTracks={playlistTracks} playlistName={playlistName} playlistsFetched={playlistsFetched} onRemove={removeTrack} onNameChange={setPlaylistName} onSave={savePlaylist} onGet={toggleButton} playlists={playlists} msgVisibility={msgVisibility} msgText={messageText} msgColor={messageColor} getButton={getButton} get={getPlaylist} delete={deletePlaylist} />
         </div>
         <div id="Temp-user">
           <h3>Temporary user details:</h3>
