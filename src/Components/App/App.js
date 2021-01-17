@@ -50,15 +50,15 @@ function App() {
   }
 
   function savePlaylist() {
-    const trackURIs = playlistTracks.map(track => track.uri);
-    if (!trackURIs.length) {
+    const currentTrackURIs = playlistTracks.map(track => track.uri);
+    if (!currentTrackURIs.length) {
       return activateMsg('Tracks required.', '#FF0000');
     }
     if (!playlistName) {
       return activateMsg('Playlist name required.', '#FF0000');
     }
     if (!editMode) {
-      Spotify.savePlaylist(playlistName, trackURIs).then(() => {
+      Spotify.savePlaylist(playlistName, currentTrackURIs).then(() => {
         activateMsg('Playlist saved!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
@@ -68,8 +68,8 @@ function App() {
     if (editMode) {
       // When saving an existing playlist, remove all previously saved tracks and then save all current playlist tracks to Spotify.
       Spotify.renamePlaylist(playlistName, playlistId)
-      .then(Spotify.deleteTracks(oldTrackURIs, playlistId))
-      .then(Spotify.addTracks(trackURIs, playlistId))
+      .then(Spotify.deleteTracks(previousTrackURIs, playlistId))
+      .then(Spotify.addTracks(currentTrackURIs, playlistId))
       .then(() => {
         activateMsg('Playlist updated!', '#228B22');
         setPlaylistName('New Playlist');
