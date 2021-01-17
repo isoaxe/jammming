@@ -142,13 +142,17 @@ const Spotify = {
     })
   },
 
-  deleteTrack(trackURI, playlistId) {
+  deleteTracks(trackURIs, playlistId) {
     const accessToken = Spotify.getAccessToken();
     const headers = {Authorization: `Bearer ${accessToken}`};
+    const formattedTrackURIs = [];
+    for (let i=0; i<trackURIs.length; i++) {
+      formattedTrackURIs.push({uri: trackURIs[i]});
+    }
     return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
       method: 'DELETE',
       headers: headers,
-      body: JSON.stringify({tracks: [{uri: trackURI}]})
+      body: JSON.stringify({tracks: formattedTrackURIs})
     })
   },
 
