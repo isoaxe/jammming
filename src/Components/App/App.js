@@ -38,11 +38,6 @@ function App() {
       searchResults.splice(index, 1);
       setSearchResults([...searchResults]);
     }
-    if (editMode) {
-      Spotify.addTrack(track.uri, playlistId).then(() => {
-        activateMsg('Track added!', '#228B22');
-      });
-    }
   }
 
   function removeTrack(track) {
@@ -52,11 +47,6 @@ function App() {
     // Add track back to searchResults if removing from playlistTracks.
     searchResults.unshift(track);
     setSearchResults([...searchResults]);
-    if (editMode) {
-      Spotify.deleteTrack(track.uri, playlistId).then(() => {
-        activateMsg('Track removed!', '#FF0000');
-      });
-    }
   }
 
   function savePlaylist() {
@@ -76,7 +66,11 @@ function App() {
       });
     }
     if (editMode) {
-      Spotify.renamePlaylist(playlistName, playlistId).then(() => {
+      // When saving an existing playlist, remove all previously saved tracks and then save all current playlist tracks to Spotify.
+      Spotify.renamePlaylist(playlistName, playlistId)
+      .then(Spotify.deleteTracks(oldTrackURIs, playlistId))
+      .then(Spotify.addTracks(trackURIs, playlistId))
+      .then(() => {
         activateMsg('Playlist updated!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
