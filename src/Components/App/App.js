@@ -38,11 +38,6 @@ function App() {
       searchResults.splice(index, 1);
       setSearchResults([...searchResults]);
     }
-    if (editMode) {
-      Spotify.addTrack(track.uri, playlistId).then(() => {
-        activateMsg('Track added!', '#228B22');
-      });
-    }
   }
 
   function removeTrack(track) {
@@ -52,23 +47,18 @@ function App() {
     // Add track back to searchResults if removing from playlistTracks.
     searchResults.unshift(track);
     setSearchResults([...searchResults]);
-    if (editMode) {
-      Spotify.deleteTrack(track.uri, playlistId).then(() => {
-        activateMsg('Track removed!', '#FF0000');
-      });
-    }
   }
 
-  function savePlaylist() {
-    const trackURIs = playlistTracks.map(track => track.uri);
-    if (!trackURIs.length) {
+  async function savePlaylist() {
+    const currentTrackURIs = playlistTracks.map(track => track.uri);
+    if (!currentTrackURIs.length) {
       return activateMsg('Tracks required.', '#FF0000');
     }
     if (!playlistName) {
       return activateMsg('Playlist name required.', '#FF0000');
     }
     if (!editMode) {
-      Spotify.savePlaylist(playlistName, trackURIs).then(() => {
+      Spotify.savePlaylist(playlistName, currentTrackURIs).then(() => {
         activateMsg('Playlist saved!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
@@ -76,7 +66,13 @@ function App() {
       });
     }
     if (editMode) {
-      Spotify.renamePlaylist(playlistName, playlistId).then(() => {
+      const previousTracks = await Spotify.getPlaylistTracks(playlistId);
+      const previousTrackURIs = previousTracks.map(track => track.uri);
+      // When saving an existing playlist, remove all previously saved tracks and then save all current playlist tracks to Spotify.
+      Spotify.renamePlaylist(playlistName, playlistId)
+      .then(Spotify.deleteTracks(previousTrackURIs, playlistId))
+      .then(Spotify.addTracks(currentTrackURIs, playlistId))
+      .then(() => {
         activateMsg('Playlist updated!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
