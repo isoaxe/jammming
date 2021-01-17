@@ -77,7 +77,7 @@ function App() {
     }
     if (editMode) {
       Spotify.renamePlaylist(playlistName, playlistId).then(() => {
-        activateMsg('Playlist renamed!', '#228B22');
+        activateMsg('Playlist updated!', '#228B22');
         setPlaylistName('New Playlist');
         setPlaylistTracks([]);
       });
