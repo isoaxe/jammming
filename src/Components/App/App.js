@@ -49,7 +49,7 @@ function App() {
     setSearchResults([...searchResults]);
   }
 
-  function savePlaylist() {
+  async function savePlaylist() {
     const currentTrackURIs = playlistTracks.map(track => track.uri);
     if (!currentTrackURIs.length) {
       return activateMsg('Tracks required.', '#FF0000');
@@ -66,6 +66,8 @@ function App() {
       });
     }
     if (editMode) {
+      const previousTracks = await Spotify.getPlaylistTracks(playlistId);
+      const previousTrackURIs = previousTracks.map(track => track.uri);
       // When saving an existing playlist, remove all previously saved tracks and then save all current playlist tracks to Spotify.
       Spotify.renamePlaylist(playlistName, playlistId)
       .then(Spotify.deleteTracks(previousTrackURIs, playlistId))
