@@ -102,8 +102,8 @@ function App() {
     setTimeout(() => activateMsg('Playlists retrieved.', '#228B22'), 400);
   }
 
-  function deletePlaylist(id) {
-    Spotify.deletePlaylist(id);
+  function deletePlaylist(playlistId) {
+    Spotify.deletePlaylist(playlistId);
     activateMsg('Playlist deleted.', '#FF0000');
     setTimeout(() => getPlaylists(), 800);
   }
