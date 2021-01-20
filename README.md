@@ -33,4 +33,4 @@ Install all of the Node dependencies for React and other third party packages us
 
 Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits to the source code. You will also see any lint errors in the console.
 
-![Jammming Screenshot](./Jammming Screenshot.png?raw=true)
+![Jammming Screenshot](./Jammming%20Screenshot.png?raw=true)
