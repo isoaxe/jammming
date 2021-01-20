@@ -10,7 +10,7 @@ The app boilerplate was created via the Node.js [`create-react-app`](https://rea
 
 ## WebApp Functions
 
-After the page has rendered and the user tries to do anything, they will be redirected to the Spotify login page. Once they enter correct login details, they will return back to the page. If a temporary user does not have a Spotify account and does not want to create one, they can use the login details provided at the bottom of the page in order to test out this app.
+After the page has rendered and the user tries to do anything, they will be redirected to the Spotify login page. Once they enter correct login details, they will return back to the original page. If a temporary user does not have a Spotify account and does not want to create one, they can use the login details provided at the bottom of the page in order to test out this app.
 
 There is a searchbar at the top of the page that the user can type a song, artist or album name into. New user input automatically queries the Spotify API and results are displayed below to the left. To the right of the **Results** section is the **Playlist** section. Tracks from **Results** can be added to the **Playlist** section.
 
@@ -31,4 +31,6 @@ Install all of the Node dependencies for React and other third party packages us
 
 ### `npm start`
 
-Spins up a local development server. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits to the source code. You will also see any lint errors in the console.
+Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits to the source code. You will also see any lint errors in the console.
+
+![Jammming Screenshot](./Jammming Screenshot.png?raw=true)
