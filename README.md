@@ -1,14 +1,14 @@
 # Jammming
 
-[Jammming](https://www.lucasoconnell.net/jammming) is a single page React app that interacts with the Spotify API and was initially developed as part of the Web Development career path at Codecademy. However, it was greatly expanded since that and now has considerably greater functionality.
+[Jammming](https://www.lucasoconnell.net/jammming) is a single page React app that interacts with the Spotify API to search for tracks and perform CRUD operations on playlists. It was initially developed as part of the Web Development career path at Codecademy. However, it was greatly expanded since that and now has considerably greater functionality.
 
 
-## WebApp Technologies
+## Technologies
 
 The app boilerplate was created via the Node.js [`create-react-app`](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app) command which abstracts away preprocessing (via Babel) and bundling (via Webpack) automatically. This is in contrast to the way my [personal website](https://www.lucasoconnell.net/) was developed. Originally made with the old class-based syntax, it was refactored to take advantage of React hooks.
 
 
-## WebApp Functions
+## Functions
 
 After the page has rendered and the user tries to do anything, they will be redirected to the Spotify login page. Once they enter correct login details, they will return back to the original page. If a temporary user does not have a Spotify account and does not want to create one, they can use the login details provided at the bottom of the page in order to test out this app.
 
