@@ -12,7 +12,7 @@ function Playlist(props) {
 
   function message() {
     setTimeout(() => document.getElementById("Message").style.color = props.msgColor);
-    return <p id="Message">{props.msgText}</p>
+    return <p id="Message">{props.msgText}</p>;
   }
 
   function displayMessage() {

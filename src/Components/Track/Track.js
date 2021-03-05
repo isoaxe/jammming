@@ -15,16 +15,16 @@ function Track(props) {
   function renderAction() {
     if (props.isRemoval) {
       return <button className="Track-action" onClick={removeTrack}> -
-      </button>
+      </button>;
     } else {
       return <button className="Track-action" onClick={addTrack}> +
-      </button>
+      </button>;
     }
   }
 
   function renderPreview() {
     if (props.track.previewUrl) {
-      return <a href={props.track.previewUrl} target="_blank" rel="noopener noreferrer"> | Preview</a>
+      return <a href={props.track.previewUrl} target="_blank" rel="noopener noreferrer"> | Preview</a>;
     }
   }
 
