@@ -33,4 +33,8 @@ Install all of the Node dependencies for React and other third party packages us
 
 Runs the app in development mode via `node server.js`. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits to the source code. You will also see any linting errors in the console.
 
+### `npm serve`
+
+Builds the app via `npm run build` and then opens a Firebase hosting instance via `firebase emulators:start`. This is similar to `npm start`, except for a production build rather than development. Unlike the `start` command, any changes made after running `serve` will not be incorporated. The emulator will have to be terminated and restarted to see changes. Used to test that everything is working as expected prior to deployment.
+
 ![Jammming Screenshot](./Jammming%20Screenshot.png?raw=true)
