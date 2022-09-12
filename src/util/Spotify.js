@@ -1,4 +1,5 @@
 let accessToken;
+// TODO: Replace the clientId below when remote hosting.
 const clientId = 'deb893321b254c52bba3a4e398647532';
 const redirectURI = window.location.href;
 
