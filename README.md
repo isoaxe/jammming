@@ -38,6 +38,8 @@ Runs the app in development mode via `node server.js`. Open [http://localhost:30
 Builds the app via `npm run build` and then opens a Firebase hosting instance via `firebase emulators:start`. This is similar to `npm start`, except for a production build rather than development. Unlike the `start` command, any changes made after running `serve` will not be incorporated. The emulator will have to be terminated and restarted to see changes. Used to test that everything is working as expected prior to deployment.
 
 
+![Jammming Screenshot](./Jammming%20Screenshot.png?raw=true)
+
 ## Remote Hosting
 
 This section describes how to host the project with Firebase.
@@ -60,5 +62,3 @@ In order to use the Spotify API with a remote-hosted site, a few things listed b
 3. Select 'Create an App' from the menu.
 4. Replace the [`clientId`](https://github.com/Isoaxe/jammming/blob/master/src/util/Spotify.js#L2) with the one generated from your new app in step 3.
 5. Click on the app, then on 'Edit Settings', then add the Firebase and `localhost` URLs to the 'Redirect URIs' section. The URLs listed here will be whitelisted and able to make requests to the Spotify API without being blocked.
-
-![Jammming Screenshot](./Jammming%20Screenshot.png?raw=true)
