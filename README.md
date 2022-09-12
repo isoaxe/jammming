@@ -23,7 +23,7 @@ Finally, there is a messaging system that temporarily displays the current statu
 
 ## Local Setup
 
-The project can be cloned and set up locally by the following CLI commands from the **jammming directory**.
+The project can be forked and set up locally by the following CLI commands from the **jammming directory**.
 
 ### `npm install`
 
