@@ -50,4 +50,15 @@ This section describes how to host the project with Firebase.
 6. Replace the value of the `default` field in [`.firebaserc`](https://github.com/Isoaxe/jammming/blob/master/.firebaserc#L3) with your `project-id`.
 7. Execute the shell command `npm run deploy` to make a production build of the project and deploy to Firebase.
 
+
+## Spotify Setup
+
+In order to use the Spotify API with a remote-hosted site, a few things listed below need to be completed. If just testing locally, then these do not need to be done and the existing values within this project can be used. Both `localhost:3000` and `localhost:5000` have been whitelisted.
+
+1. Create a [Spotify developer](https://developer.spotify.com/) account.
+2. From the top menu, select Dashboard -> Log In.
+3. Select 'Create an App' from the menu.
+4. Replace the [`clientId`](https://github.com/Isoaxe/jammming/blob/master/src/util/Spotify.js#L2) with the one generated from your new app in step 3.
+5. Click on the app, then on 'Edit Settings', then add the Firebase and `localhost` URLs to the 'Redirect URIs' section. The URLs listed here will be whitelisted and able to make requests to the Spotify API without being blocked.
+
 ![Jammming Screenshot](./Jammming%20Screenshot.png?raw=true)
